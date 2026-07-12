@@ -1,0 +1,41 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: numlookupapi.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Google Trust Services (WE1)
+  cert_expires: Oct  7 06:44:54 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  server: Netlify
+- host: www.numlookupapi.com
+  https: true
+  tls_version: TLSv1.3
+  hsts: true
+  hsts_max_age: 31536000
+  server: Netlify
+- host: api.numlookupapi.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Google Trust Services (WE1)
+  cert_expires: Oct  7 06:44:54 2026 GMT
+  hsts: false
+  server: cloudflare
+  gateway: Kong
+  notes: >-
+    Unauthenticated requests return HTTP/2 401 with WWW-Authenticate Key
+    realm="kong". No Strict-Transport-Security header was returned on the API
+    host at probe time.
+domains:
+- domain: numlookupapi.com
+  dnssec: false
+  caa: []
+  spf: true
+  spf_record: v=spf1 include:spf.sendinblue.com include:spf.improvmx.com include:mail.zendesk.com mx ~all
+  dmarc: true
+  dmarc_policy: quarantine
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

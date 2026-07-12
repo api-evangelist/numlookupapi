@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "NumLookupAPI",
+    "description": "Phone number validation and lookup REST API from everapi. Base URL: https://api.numlookupapi.com/v1. Authenticate with an API key in the `apikey` header (recommended) or as an `apikey` query-string parameter. Endpoints: GET /validate/{phone_number} and GET /status.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "apikey", "type": "string" },
+      { "key": "value", "value": "{{apikey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.numlookupapi.com/v1", "type": "string" },
+    { "key": "apikey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Validation",
+      "item": [
+        {
+          "name": "Validate a phone number",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "apikey", "value": "{{apikey}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/validate/:phone_number?country_code=US",
+              "host": ["{{baseUrl}}"],
+              "path": ["validate", ":phone_number"],
+              "query": [
+                { "key": "country_code", "value": "US", "description": "Optional ISO Alpha-2 country code for numbers supplied without a country prefix." }
+              ],
+              "variable": [
+                { "key": "phone_number", "value": "+14158586273", "description": "The phone number to validate, with or without a leading + country prefix." }
+              ]
+            },
+            "description": "Validates a phone number and returns a valid flag plus local and international formats, country prefix, ISO country code and name, location, carrier, and line type."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Account",
+      "item": [
+        {
+          "name": "Get account status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "apikey", "value": "{{apikey}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["status"]
+            },
+            "description": "Returns the account identifier and remaining request quota for the month and any grace allowance. Does not count against your quota or rate limit."
+          }
+        }
+      ]
+    }
+  ]
+}

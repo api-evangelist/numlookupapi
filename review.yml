@@ -1,0 +1,108 @@
+aid: numlookupapi
+name: NumLookupAPI
+review:
+  question: Does NumLookupAPI expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. NumLookupAPI's entire documented public
+    surface is request/response REST over HTTPS (GET /v1/validate and
+    GET /v1/status under https://api.numlookupapi.com). There is no server-push
+    transport - no WebSocket (wss://) and no Server-Sent Events (SSE) - on
+    NumLookupAPI's own API to model, so no AsyncAPI spec and no asyncapi/
+    directory were created.
+findings:
+  summary: |
+    NumLookupAPI does not publish a documented public WebSocket API. It is a
+    synchronous phone number validation and lookup REST API operated by everapi
+    (github.com/everapihq). The base host is https://api.numlookupapi.com and
+    the documented endpoints are GET /v1/validate/{phone_number} and
+    GET /v1/status - both pure request/response REST over HTTPS, authenticated
+    with an `apikey` value passed in an HTTP header (recommended) or query
+    string. No realtime, bidirectional, or streaming WebSocket (ws:// or wss://)
+    endpoint is documented anywhere in NumLookupAPI's docs, and there is no SSE
+    stream either.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.numlookupapi.com/v1
+      documented: true
+      note: Phone number validation (GET /v1/validate) and account status (GET /v1/status). All request/response over HTTPS.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in NumLookupAPI's docs as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events stream is documented. Responses are single synchronous JSON payloads.
+  liveProbe: |
+    On 2026-07-12, unauthenticated GET requests to
+    https://api.numlookupapi.com/v1/validate/+14158586273 and
+    https://api.numlookupapi.com/v1/status each returned HTTP 401 with
+    {"message":"No API key found in request"} and a
+    `WWW-Authenticate: Key realm="kong"` header, confirming the base host,
+    HTTPS/HTTP2, an API-key security model, and a Kong API gateway fronted by
+    Cloudflare. The success response body could not be exercised without a key,
+    so the response fields below are confirmed from the published documentation
+    rather than a live 200 payload.
+  endpointsConfirmedRest:
+    - GET https://api.numlookupapi.com/v1/validate/{phone_number}
+    - GET https://api.numlookupapi.com/v1/status
+  endpointStatus:
+    - endpoint: GET /v1/validate/{phone_number}
+      source: documented + live-probed (401 without key)
+      note: >-
+        Path, method, apikey auth, and optional country_code query parameter are
+        documented. Response fields (valid, number, local_format,
+        international_format, country_prefix, country_code, country_name,
+        location, carrier, line_type) are taken verbatim from the documented
+        example; not observed on a live 200 because a key is required.
+    - endpoint: GET /v1/status
+      source: documented + live-probed (401 without key)
+      note: >-
+        Returns account_id and a quotas object (month + grace, each with total,
+        used, remaining) per the documented example. Does not count against
+        quota or rate limit.
+  authentication: |
+    Single API key. Passed either in the `apikey` HTTP request header
+    (recommended) or as an `apikey` query-string parameter (the docs warn this
+    can expose the key in access logs). No OAuth, and no separate signing scheme.
+  pricing: |
+    Free tier of 100 requests/month (10 req/min cap). Paid monthly plans: Basic
+    $9.99 (5,000), Pro $49.99 (50,000), Scale $109.99 (250,000), and a Custom
+    tier - all paid plans remove the per-minute rate cap. ~20% yearly discount.
+    Only successful calls count against the monthly quota.
+sources:
+  - url: https://numlookupapi.com/docs
+    type: Documentation
+    note: Overview of the API; links validate, status, authentication, rate-limit pages. REST only.
+  - url: https://numlookupapi.com/docs/validate
+    type: APIReference
+    note: GET /v1/validate/{phone_number}; apikey header; optional country_code; documents all response fields.
+  - url: https://numlookupapi.com/docs/status
+    type: APIReference
+    note: GET /v1/status; returns account_id and quotas (month/grace). No quota/rate-limit charge.
+  - url: https://numlookupapi.com/docs/authentication
+    type: Documentation
+    note: apikey via HTTP header (recommended) or query string.
+  - url: https://numlookupapi.com/docs/rate-limit
+    type: Documentation
+    note: Per-plan quotas; 429 on exceed; X-RateLimit-* quota headers; only successful calls count.
+  - url: https://numlookupapi.com/pricing
+    type: Pricing
+    note: Free 100/mo plus Basic/Pro/Scale/Custom paid tiers; yearly discount.
+  - url: https://github.com/everapihq/numlookupapi
+    type: SourceCode
+    note: everapi's central repo linking official Python/PHP/JS/Ruby SDKs and a Postman collection; no OpenAPI spec in-repo.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket (or any server-push) protocol surface exists. NumLookupAPI's
+    own public API is entirely request/response REST over HTTPS, so no AsyncAPI
+    document was created and no asyncapi/ directory exists in this repo. An
+    OpenAPI 3.0 spec, Postman collection, and Open Collection were authored for
+    the two documented REST endpoints.

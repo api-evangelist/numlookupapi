@@ -1,0 +1,76 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: NumLookupAPI
+providerId: numlookupapi
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Phone Validation
+- Number Verification
+- Rate Limiting
+- Quotas
+description: >-
+  NumLookupAPI enforces two things per account: a monthly request quota tied to
+  your plan, and (on the Free tier) a per-minute request cap. The Free tier
+  allows 100 requests per month at up to 10 requests per minute; the paid tiers
+  (Basic, Pro, Scale) carry larger monthly allowances and remove the per-minute
+  cap. Only successful calls count against the quota - validation errors and
+  server errors are not charged. Requests to the /status endpoint do not count
+  against the quota or rate limit. Exceeding a limit returns HTTP 429.
+notes: >-
+  Numeric monthly allowances are taken from the pricing page as of 2026-07-12
+  and modeled here (reconciled:false). The API returns X-RateLimit-* quota
+  headers so clients can track remaining allowance without calling /status.
+sources:
+- https://numlookupapi.com/docs/rate-limit
+- https://numlookupapi.com/pricing
+responseCodes:
+  throttled: 429
+responseHeaders:
+- X-RateLimit-Limit-Quota-Minute
+- X-RateLimit-Limit-Quota-Month
+- X-RateLimit-Remaining-Quota-Minute
+- X-RateLimit-Remaining-Quota-Month
+limits:
+- name: Free Monthly Quota
+  scope: account
+  metric: requests
+  limit: 100 per month
+  notes: Free tier monthly allowance.
+- name: Free Per-Minute Rate
+  scope: account
+  metric: requests
+  limit: 10 per minute
+  notes: Per-minute cap applies to the Free tier only.
+- name: Basic Monthly Quota
+  scope: account
+  metric: requests
+  limit: 5000 per month
+  notes: No per-minute rate cap.
+- name: Pro Monthly Quota
+  scope: account
+  metric: requests
+  limit: 50000 per month
+  notes: No per-minute rate cap.
+- name: Scale Monthly Quota
+  scope: account
+  metric: requests
+  limit: 250000 per month
+  notes: No per-minute rate cap.
+- name: Status Endpoint
+  scope: account
+  metric: requests
+  limit: not counted
+  notes: GET /v1/status does not count against the quota or rate limit.
+policies:
+- name: Successful Calls Only
+  description: Only successful calls count against the monthly quota; validation and server errors are not charged.
+- name: Quota Headers
+  description: X-RateLimit-Limit/Remaining-Quota-Minute and -Month headers report remaining allowance on each response.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on HTTP 429 responses and wait for the quota window to reset.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

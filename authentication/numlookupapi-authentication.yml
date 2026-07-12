@@ -1,0 +1,38 @@
+generated: '2026-07-12'
+method: documented
+source: https://numlookupapi.com/docs/authentication
+summary:
+  types:
+  - apiKey
+schemes:
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameterName: apikey
+  description: >-
+    API key passed in the `apikey` HTTP request header. This is the recommended
+    method. Example: `curl "https://api.numlookupapi.com/v1/status" -H "apikey:
+    YOUR-API-KEY"`.
+  recommended: true
+  sources:
+  - https://numlookupapi.com/docs/authentication
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameterName: apikey
+  description: >-
+    API key passed as the `apikey` query-string parameter. Not recommended - the
+    docs warn it can expose your API key in access logs and similar. Example:
+    `curl "https://api.numlookupapi.com/v1/status?apikey=YOUR-API-KEY"`.
+  recommended: false
+  sources:
+  - https://numlookupapi.com/docs/authentication
+notes: >-
+  Live-probed 2026-07-12: unauthenticated requests return HTTP 401 with
+  {"message":"No API key found in request"} and a `WWW-Authenticate: Key
+  realm="kong"` header, confirming an API-key model behind a Kong gateway. A key
+  is obtained from the NumLookupAPI account dashboard after signing up (free tier
+  available).
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

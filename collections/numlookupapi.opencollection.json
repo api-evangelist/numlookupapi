@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NumLookupAPI",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "apikey",
+        "value": "{{apikey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Validate a phone number", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numlookupapi.com/v1/validate/:phone_number?country_code=US",
+            "params": [
+              { "name": "phone_number", "value": "+14158586273", "type": "path", "description": "The phone number to validate, with or without a leading + country prefix." },
+              { "name": "country_code", "value": "US", "type": "query", "description": "Optional ISO Alpha-2 country code for numbers supplied without a country prefix." }
+            ]
+          },
+          "docs": "Validates a phone number and returns a valid flag plus local and international formats, country prefix, ISO country code and name, location, carrier, and line type."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get account status", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numlookupapi.com/v1/status"
+          },
+          "docs": "Returns the account identifier and remaining request quota for the month and any grace allowance. Does not count against your quota or rate limit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,149 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: NumLookupAPI
+providerId: numlookupapi
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Phone Validation
+- Number Verification
+- Carrier Lookup
+- Line Type
+- Plans
+description: >-
+  NumLookupAPI is sold on flat monthly subscription tiers, each of which grants a
+  fixed monthly allowance of validation requests. A free-forever tier provides
+  100 requests/month capped at 10 requests/minute; paid tiers (Basic, Pro, Scale)
+  increase the monthly allowance and remove the per-minute rate cap, and a Custom
+  tier covers higher volumes by arrangement. Only successful calls count against
+  the monthly quota. Effective per-lookup cost falls as the tier size grows.
+  Yearly billing is discounted roughly 20 percent versus monthly.
+notes: >-
+  Prices and monthly allowances are taken from the published NumLookupAPI pricing
+  page as of 2026-07-12 and are modeled here (reconciled:false). Verify current
+  tiers, allowances, and the exact yearly discount on the pricing page during
+  reconciliation. The per-lookup figures below are derived from monthly price
+  divided by monthly allowance and are approximate.
+sources:
+- https://numlookupapi.com/pricing
+- https://numlookupapi.com/docs/rate-limit
+plans:
+- id: numlookupapi-free
+  name: Free
+  type: free
+  description: >-
+    Free-forever tier for evaluation and small workloads. 100 requests per month,
+    capped at 10 requests per minute.
+  entries:
+  - label: Included Requests
+    name: free_requests
+    type: usage
+    metric: requests
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '$0.00'
+    userMultiplied: false
+  - label: Rate Limit
+    name: free_rate_limit
+    type: usage
+    metric: requests
+    limit: 10
+    timeFrame: minute
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Phone Number Validation
+  - name: Account Status
+- id: numlookupapi-basic
+  name: Basic
+  type: paid
+  description: >-
+    Entry paid tier. 5,000 requests per month with no per-minute rate cap.
+    Approximately $0.002 per lookup at full utilization.
+  entries:
+  - label: Included Requests
+    name: basic_requests
+    type: usage
+    metric: requests
+    limit: 5000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '$9.99 per month'
+    userMultiplied: false
+  elements:
+  - name: Phone Number Validation
+  - name: Account Status
+  - name: No Per-Minute Rate Limit
+- id: numlookupapi-pro
+  name: Pro
+  type: paid
+  description: >-
+    Most popular paid tier. 50,000 requests per month with no per-minute rate
+    cap. Approximately $0.001 per lookup at full utilization.
+  entries:
+  - label: Included Requests
+    name: pro_requests
+    type: usage
+    metric: requests
+    limit: 50000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '$49.99 per month'
+    userMultiplied: false
+  elements:
+  - name: Phone Number Validation
+  - name: Account Status
+  - name: No Per-Minute Rate Limit
+- id: numlookupapi-scale
+  name: Scale
+  type: paid
+  description: >-
+    High-volume paid tier. 250,000 requests per month with no per-minute rate
+    cap. Approximately $0.00044 per lookup at full utilization.
+  entries:
+  - label: Included Requests
+    name: scale_requests
+    type: usage
+    metric: requests
+    limit: 250000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '$109.99 per month'
+    userMultiplied: false
+  elements:
+  - name: Phone Number Validation
+  - name: Account Status
+  - name: No Per-Minute Rate Limit
+- id: numlookupapi-custom
+  name: Custom
+  type: enterprise
+  description: >-
+    Custom monthly request volume and negotiated price for high-volume needs.
+    Contact everapi.
+  entries:
+  - label: Custom Volume
+    name: custom_requests
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: custom (contact sales)
+    userMultiplied: false
+  elements:
+  - name: Phone Number Validation
+  - name: Account Status
+  - name: Custom Volume Pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

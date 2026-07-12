@@ -1,0 +1,93 @@
+aid: numlookupapi
+url: https://raw.githubusercontent.com/api-evangelist/numlookupapi/refs/heads/main/apis.yml
+name: NumLookupAPI
+kind: company
+description: NumLookupAPI is a phone number validation and lookup REST API from everapi.
+  A single GET request validates a phone number and returns whether it is valid
+  along with its local and international formats, country prefix, ISO country code
+  and name, geographic location, carrier, and line type (mobile, landline, etc.).
+  It offers a free tier of 100 requests per month, is authenticated with a simple
+  API key, and is used for phone verification, data validation, and caller identity
+  enrichment.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Number Verification
+- Phone Validation
+- Phone Number Lookup
+- Carrier Lookup
+- Line Type
+- Verification
+- Data Validation
+- Caller Identity
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: numlookupapi:numlookupapi-phone-validation-api
+  name: NumLookupAPI Phone Number Validation API
+  tags:
+  - Phone Validation
+  - Number Verification
+  - Carrier Lookup
+  - Line Type
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://numlookupapi.com/docs/validate
+  baseURL: https://api.numlookupapi.com/v1
+  properties:
+  - url: https://numlookupapi.com/docs
+    type: Documentation
+  - url: https://numlookupapi.com/docs/validate
+    type: APIReference
+  - url: openapi/numlookupapi-openapi.yml
+    type: OpenAPI
+  - url: collections/numlookupapi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/numlookupapi.opencollection.json
+    type: OpenCollection
+  description: Validate and look up a phone number with a single GET request. Returns
+    a valid flag plus local and international formats, country prefix, ISO country
+    code and name, location, carrier, and line type. Accepts numbers with a country
+    prefix or a bare number paired with an ISO country_code.
+- aid: numlookupapi:numlookupapi-account-status-api
+  name: NumLookupAPI Account Status API
+  tags:
+  - Account
+  - Quota
+  - Usage
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://numlookupapi.com/docs/status
+  baseURL: https://api.numlookupapi.com/v1
+  properties:
+  - url: https://numlookupapi.com/docs/status
+    type: APIReference
+  - url: openapi/numlookupapi-openapi.yml
+    type: OpenAPI
+  - url: collections/numlookupapi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/numlookupapi.opencollection.json
+    type: OpenCollection
+  description: Return the current account identifier and remaining request quota for
+    the month and any grace allowance. Requests to this endpoint do not count against
+    your quota or rate limit.
+common:
+- type: Authentication
+  url: authentication/numlookupapi-authentication.yml
+- type: DomainSecurity
+  url: security/numlookupapi-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/everapihq
+- type: LinkedIn
+  url: https://www.linkedin.com/company/everapi
+- type: Website
+  url: https://numlookupapi.com
+- type: Documentation
+  url: https://numlookupapi.com/docs
+- type: Plans
+  url: plans/numlookupapi-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/numlookupapi-rate-limits.yml
+- type: FinOps
+  url: finops/numlookupapi-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

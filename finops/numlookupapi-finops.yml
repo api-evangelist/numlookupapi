@@ -1,0 +1,91 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: NumLookupAPI
+providerId: numlookupapi
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Phone Validation
+- Number Verification
+- Carrier Lookup
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of NumLookupAPI spend. NumLookupAPI is billed as a flat monthly
+  subscription per tier (Free, Basic, Pro, Scale, Custom), where each tier grants
+  a fixed monthly allowance of validation requests. Cost is therefore a recurring
+  monthly fee rather than pure metered usage; the effective per-lookup rate is
+  the monthly price divided by the monthly allowance, and it falls as you move up
+  tiers. Only successful calls consume the allowance, and /status checks are free.
+  Overage is handled by upgrading the plan (or via a small grace allowance)
+  rather than automatic per-unit charges.
+notes: >-
+  Subscription prices and monthly allowances are modeled from the pricing page as
+  of 2026-07-12 (reconciled:false). Per-lookup meter figures are derived
+  (price / monthly allowance) and approximate. Verify current tiers, the yearly
+  discount, and grace/overage behavior on the pricing page during reconciliation.
+sources:
+- https://numlookupapi.com/pricing
+- https://numlookupapi.com/docs/rate-limit
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: everapi
+serviceCategory: Data Enrichment and Validation
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: NumLookupAPI
+  ServiceCategory: Data Enrichment and Validation
+  ProviderName: NumLookupAPI
+  PublisherName: everapi
+  InvoiceIssuerName: everapi
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: monthly_subscription
+  description: Flat monthly subscription fee for the selected plan tier.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: validation_requests
+  description: Successful validation requests consumed against the plan's monthly allowance.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: effective_per_lookup
+  description: Derived effective cost per successful lookup (monthly price divided by monthly allowance); approximate.
+  unit: requests
+  aggregation: average
+  dimensions:
+  - account
+  - plan
+principles:
+- name: Visibility
+  description: Track successful validation requests against the plan allowance using the /status endpoint and the X-RateLimit-*-Quota-Month headers.
+- name: Allocation
+  description: Use a dedicated API key per workload or team so validation volume and subscription cost map to internal cost centers.
+- name: Optimization
+  description: Right-size the plan tier to actual monthly volume to lower the effective per-lookup cost; cache or de-duplicate repeat lookups; avoid re-validating unchanged numbers.
+- name: Accountability
+  description: Review monthly request consumption against the tier allowance and upgrade or downgrade tiers before hitting overage or paying for unused headroom.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
