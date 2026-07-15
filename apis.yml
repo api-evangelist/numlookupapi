@@ -70,6 +70,8 @@ apis:
     the month and any grace allowance. Requests to this endpoint do not count against
     your quota or rate limit.
 common:
+- type: AgenticAccess
+  url: agentic-access/numlookupapi-agentic-access.yml
 - type: Authentication
   url: authentication/numlookupapi-authentication.yml
 - type: DomainSecurity
