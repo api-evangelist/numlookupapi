@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: NumLookup Account Validation API
+  description: NumLookupAPI is a phone number validation and lookup REST API from everapi. A single GET request to /v1/validate/{phone_number} validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, geographic location, carrier, and line type. A GET /v1/status endpoint reports the current account quota. All requests authenticate with an API key passed in the `apikey` HTTP header (recommended) or as an `apikey` query-string parameter. Modeled from the public documentation at https://numlookupapi.com/docs; the validate 200 response fields are taken from the documented example (a live 200 requires a key).
+  version: '1.0'
+  contact:
+    name: everapi
+    url: https://numlookupapi.com
+servers:
+- url: https://api.numlookupapi.com/v1
+  description: NumLookupAPI production
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Validation
+  description: Phone number validation and lookup.
+paths:
+  /validate/{phone_number}:
+    get:
+      operationId: validatePhoneNumber
+      tags:
+      - Validation
+      summary: Validate and look up a phone number
+      description: Validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, location, carrier, and line type. The number may include its country prefix (e.g. +14158586273) or be a bare national number paired with the country_code query parameter.
+      parameters:
+      - name: phone_number
+        in: path
+        required: true
+        description: The phone number to validate, with or without a leading + country prefix.
+        schema:
+          type: string
+        example: '+14158586273'
+      - name: country_code
+        in: query
+        required: false
+        description: ISO Alpha-2 country code used to interpret a number supplied without a country prefix.
+        schema:
+          type: string
+        example: US
+      responses:
+        '200':
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+              example:
+                valid: true
+                number: '14158586273'
+                local_format: '4158586273'
+                international_format: '+14158586273'
+                country_prefix: '+1'
+                country_code: US
+                country_name: United States of America
+                location: Novato
+                carrier: AT&T Mobility LLC
+                line_type: mobile
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Rate limit or monthly quota exceeded. Only successful calls count against the quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: No API key found in request or the key is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: No API key found in request
+  schemas:
+    ValidationResult:
+      type: object
+      properties:
+        valid:
+          type: boolean
+          description: Whether the phone number is valid.
+          example: true
+        number:
+          type: string
+          description: The normalized phone number.
+          example: '14158586273'
+        local_format:
+          type: string
+          description: The national (local) format of the number.
+          example: '4158586273'
+        international_format:
+          type: string
+          description: The E.164 international format of the number.
+          example: '+14158586273'
+        country_prefix:
+          type: string
+          description: The international dialing prefix for the country.
+          example: '+1'
+        country_code:
+          type: string
+          description: ISO Alpha-2 country code.
+          example: US
+        country_name:
+          type: string
+          description: Full country name.
+          example: United States of America
+        location:
+          type: string
+          description: Geographic location associated with the number, when available.
+          example: Novato
+        carrier:
+          type: string
+          description: Carrier / operator associated with the number, when available.
+          example: AT&T Mobility LLC
+        line_type:
+          type: string
+          description: Line type, such as mobile or landline, when available.
+          example: mobile
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: No API key found in request
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: apikey
+      description: API key passed in the `apikey` HTTP header. Recommended.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API key passed as the `apikey` query-string parameter. Not recommended - may expose the key in access logs.

@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: NumLookup Account API
+  description: NumLookupAPI is a phone number validation and lookup REST API from everapi. A single GET request to /v1/validate/{phone_number} validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, geographic location, carrier, and line type. A GET /v1/status endpoint reports the current account quota. All requests authenticate with an API key passed in the `apikey` HTTP header (recommended) or as an `apikey` query-string parameter. Modeled from the public documentation at https://numlookupapi.com/docs; the validate 200 response fields are taken from the documented example (a live 200 requires a key).
+  version: '1.0'
+  contact:
+    name: everapi
+    url: https://numlookupapi.com
+servers:
+- url: https://api.numlookupapi.com/v1
+  description: NumLookupAPI production
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Account
+  description: Account quota and usage status.
+paths:
+  /status:
+    get:
+      operationId: getAccountStatus
+      tags:
+      - Account
+      summary: Get account quota status
+      description: Returns the account identifier and remaining request quota for the current month and any grace allowance. Requests to this endpoint do not count against your quota or rate limit.
+      responses:
+        '200':
+          description: Account quota status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountStatus'
+              example:
+                account_id: 313373133731337
+                quotas:
+                  month:
+                    total: 300
+                    used: 72
+                    remaining: 229
+                  grace:
+                    total: 0
+                    used: 0
+                    remaining: 0
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    AccountStatus:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The account identifier.
+          example: 313373133731337
+        quotas:
+          type: object
+          description: Request quota usage.
+          properties:
+            month:
+              $ref: '#/components/schemas/QuotaBucket'
+            grace:
+              $ref: '#/components/schemas/QuotaBucket'
+    QuotaBucket:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total requests allowed in the period.
+          example: 300
+        used:
+          type: integer
+          description: Requests used in the period.
+          example: 72
+        remaining:
+          type: integer
+          description: Requests remaining in the period.
+          example: 229
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: No API key found in request
+  responses:
+    Unauthorized:
+      description: No API key found in request or the key is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: No API key found in request
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: apikey
+      description: API key passed in the `apikey` HTTP header. Recommended.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API key passed as the `apikey` query-string parameter. Not recommended - may expose the key in access logs.
