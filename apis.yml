@@ -9,7 +9,20 @@ description: NumLookupAPI is a phone number validation and lookup REST API from 
   It offers a free tier of 100 requests per month, is authenticated with a simple
   API key, and is used for phone verification, data validation, and caller identity
   enrichment.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/numlookupapi.png
 tags:
 - Number Verification
 - Phone Validation
@@ -23,52 +36,46 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: numlookupapi:numlookupapi-phone-validation-api
-  name: NumLookupAPI Phone Number Validation API
-  tags:
-  - Phone Validation
-  - Number Verification
-  - Carrier Lookup
-  - Line Type
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: numlookupapi:numlookupapi-account-api
+  name: NumLookupAPI Account API
+  description: Account quota and usage status.
   humanURL: https://numlookupapi.com/docs/validate
   baseURL: https://api.numlookupapi.com/v1
-  properties:
-  - url: https://numlookupapi.com/docs
-    type: Documentation
-  - url: https://numlookupapi.com/docs/validate
-    type: APIReference
-  - url: openapi/numlookupapi-openapi.yml
-    type: OpenAPI
-  - url: collections/numlookupapi.postman_collection.json
-    type: PostmanCollection
-  - url: collections/numlookupapi.opencollection.json
-    type: OpenCollection
-  description: Validate and look up a phone number with a single GET request. Returns
-    a valid flag plus local and international formats, country prefix, ISO country
-    code and name, location, carrier, and line type. Accepts numbers with a country
-    prefix or a bare number paired with an ISO country_code.
-- aid: numlookupapi:numlookupapi-account-status-api
-  name: NumLookupAPI Account Status API
   tags:
   - Account
-  - Quota
-  - Usage
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://numlookupapi.com/docs/status
-  baseURL: https://api.numlookupapi.com/v1
   properties:
-  - url: https://numlookupapi.com/docs/status
-    type: APIReference
-  - url: openapi/numlookupapi-openapi.yml
-    type: OpenAPI
-  - url: collections/numlookupapi.postman_collection.json
-    type: PostmanCollection
-  - url: collections/numlookupapi.opencollection.json
-    type: OpenCollection
-  description: Return the current account identifier and remaining request quota for
-    the month and any grace allowance. Requests to this endpoint do not count against
-    your quota or rate limit.
+  - type: OpenAPI
+    url: openapi/numlookupapi-account-api-openapi.yml
+  - type: Documentation
+    url: https://numlookupapi.com/docs
+  - type: APIReference
+    url: https://numlookupapi.com/docs/validate
+  - type: PostmanCollection
+    url: collections/numlookupapi.postman_collection.json
+  - type: OpenCollection
+    url: collections/numlookupapi.opencollection.json
+  - type: APIReference
+    url: https://numlookupapi.com/docs/status
+- aid: numlookupapi:numlookupapi-validation-api
+  name: NumLookupAPI Validation API
+  description: Phone number validation and lookup.
+  humanURL: https://numlookupapi.com/docs/validate
+  baseURL: https://api.numlookupapi.com/v1
+  tags:
+  - Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/numlookupapi-validation-api-openapi.yml
+  - type: Documentation
+    url: https://numlookupapi.com/docs
+  - type: APIReference
+    url: https://numlookupapi.com/docs/validate
+  - type: PostmanCollection
+    url: collections/numlookupapi.postman_collection.json
+  - type: OpenCollection
+    url: collections/numlookupapi.opencollection.json
+  - type: APIReference
+    url: https://numlookupapi.com/docs/status
 common:
 - type: AgenticAccess
   url: agentic-access/numlookupapi-agentic-access.yml
