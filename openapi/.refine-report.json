@@ -1,0 +1,16 @@
+{
+  "provider": "numlookupapi",
+  "sources": [
+    "numlookupapi-account-api-openapi.yml",
+    "numlookupapi-validation-api-openapi.yml"
+  ],
+  "outputs": [
+    "numlookupapi-account-api-openapi.yml",
+    "numlookupapi-validation-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
