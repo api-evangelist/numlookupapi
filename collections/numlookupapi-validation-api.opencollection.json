@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NumLookup Account Validation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate and look up a phone number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numlookupapi.com/v1/validate/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "+14158586273",
+                "type": "path",
+                "description": "The phone number to validate, with or without a leading + country prefix."
+              },
+              {
+                "name": "country_code",
+                "value": "US",
+                "type": "query",
+                "description": "ISO Alpha-2 country code used to interpret a number supplied without a country prefix."
+              }
+            ]
+          },
+          "docs": "Validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, location, carrier, and line type. The number may include its country prefix (e.g. +14158586273) or be a bare national number paired with the country_code query parameter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

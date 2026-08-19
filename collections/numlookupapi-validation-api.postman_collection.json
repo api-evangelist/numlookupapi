@@ -1,0 +1,271 @@
+{
+  "item": [
+    {
+      "id": "dd119238-748e-491c-98f2-e82e5fed26b8",
+      "name": "Validation",
+      "description": {
+        "content": "Phone number validation and lookup.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5463c62-49dc-43c7-bdbd-b61a58c4856e",
+          "name": "Validate and look up a phone number",
+          "request": {
+            "name": "Validate and look up a phone number",
+            "description": {
+              "content": "Validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, location, carrier, and line type. The number may include its country prefix (e.g. +14158586273) or be a bare national number paired with the country_code query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "validate",
+                ":phone_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "ISO Alpha-2 country code used to interpret a number supplied without a country prefix."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "phone_number",
+                  "description": "(Required) The phone number to validate, with or without a leading + country prefix."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee405fc6-1a4e-421f-b6b9-51e5d10e6f9a",
+              "name": "Validation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "validate",
+                    ":phone_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "phone_number",
+                      "description": "(Required) The phone number to validate, with or without a leading + country prefix."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid\": true,\n  \"number\": \"14158586273\",\n  \"local_format\": \"4158586273\",\n  \"international_format\": \"+14158586273\",\n  \"country_prefix\": \"+1\",\n  \"country_code\": \"US\",\n  \"country_name\": \"United States of America\",\n  \"location\": \"Novato\",\n  \"carrier\": \"AT&T Mobility LLC\",\n  \"line_type\": \"mobile\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f0b120f-f4a8-4cfd-a817-971db384c0c4",
+              "name": "No API key found in request or the key is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "validate",
+                    ":phone_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "phone_number",
+                      "description": "(Required) The phone number to validate, with or without a leading + country prefix."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No API key found in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edf84d33-facf-4569-b29d-0eb6700e8e7b",
+              "name": "Rate limit or monthly quota exceeded. Only successful calls count against the quota.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "validate",
+                    ":phone_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "phone_number",
+                      "description": "(Required) The phone number to validate, with or without a leading + country prefix."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No API key found in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.numlookupapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "abb2ecaf-1032-47c0-8d85-6667994ad582",
+    "name": "NumLookup Account Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "NumLookupAPI is a phone number validation and lookup REST API from everapi. A single GET request to /v1/validate/{phone_number} validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, geographic location, carrier, and line type. A GET /v1/status endpoint reports the current account quota. All requests authenticate with an API key passed in the `apikey` HTTP header (recommended) or as an `apikey` query-string parameter. Modeled from the public documentation at https://numlookupapi.com/docs; the validate 200 response fields are taken from the documented example (a live 200 requires a key).\n\nContact Support:\n Name: everapi",
+      "type": "text/plain"
+    }
+  }
+}

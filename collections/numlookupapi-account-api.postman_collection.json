@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "d8e8351c-3a17-4939-ac41-bee9dc645039",
+      "name": "Account",
+      "description": {
+        "content": "Account quota and usage status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e1a8394-ef7a-4860-a5a7-cd4fd19915c6",
+          "name": "Get account quota status",
+          "request": {
+            "name": "Get account quota status",
+            "description": {
+              "content": "Returns the account identifier and remaining request quota for the current month and any grace allowance. Requests to this endpoint do not count against your quota or rate limit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ace856a9-04f3-49fc-8f92-347f41468489",
+              "name": "Account quota status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_id\": 313373133731337,\n  \"quotas\": {\n    \"month\": {\n      \"total\": 300,\n      \"used\": 72,\n      \"remaining\": 229\n    },\n    \"grace\": {\n      \"total\": 0,\n      \"used\": 0,\n      \"remaining\": 0\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22a8ec25-2102-431f-8e6b-0dd5261b0205",
+              "name": "No API key found in request or the key is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No API key found in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.numlookupapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "84175142-000b-479c-9b6a-8c515367512d",
+    "name": "NumLookup Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "NumLookupAPI is a phone number validation and lookup REST API from everapi. A single GET request to /v1/validate/{phone_number} validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, geographic location, carrier, and line type. A GET /v1/status endpoint reports the current account quota. All requests authenticate with an API key passed in the `apikey` HTTP header (recommended) or as an `apikey` query-string parameter. Modeled from the public documentation at https://numlookupapi.com/docs; the validate 200 response fields are taken from the documented example (a live 200 requires a key).\n\nContact Support:\n Name: everapi",
+      "type": "text/plain"
+    }
+  }
+}

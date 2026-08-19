@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NumLookup Account API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account quota status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numlookupapi.com/v1/status"
+          },
+          "docs": "Returns the account identifier and remaining request quota for the current month and any grace allowance. Requests to this endpoint do not count against your quota or rate limit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
