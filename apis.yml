@@ -9,6 +9,18 @@ description: NumLookupAPI is a phone number validation and lookup REST API from 
   It offers a free tier of 100 requests per month, is authenticated with a simple
   API key, and is used for phone verification, data validation, and caller identity
   enrichment.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
