@@ -45,21 +45,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    QuotaBucket:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total requests allowed in the period.
-          example: 300
-        used:
-          type: integer
-          description: Requests used in the period.
-          example: 72
-        remaining:
-          type: integer
-          description: Requests remaining in the period.
-          example: 229
     AccountStatus:
       type: object
       properties:
@@ -76,6 +61,21 @@ components:
               $ref: '#/components/schemas/QuotaBucket'
             grace:
               $ref: '#/components/schemas/QuotaBucket'
+    QuotaBucket:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total requests allowed in the period.
+          example: 300
+        used:
+          type: integer
+          description: Requests used in the period.
+          example: 72
+        remaining:
+          type: integer
+          description: Requests remaining in the period.
+          example: 229
     Error:
       type: object
       properties:

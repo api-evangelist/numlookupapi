@@ -77,6 +77,13 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: No API key found in request
     ValidationResult:
       type: object
       properties:
@@ -120,13 +127,6 @@ components:
           type: string
           description: Line type, such as mobile or landline, when available.
           example: mobile
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: No API key found in request
   securitySchemes:
     apiKeyHeader:
       type: apiKey
