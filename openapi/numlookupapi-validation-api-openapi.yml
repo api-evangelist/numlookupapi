@@ -62,6 +62,12 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
+    RateLimited:
+      description: Rate limit or monthly quota exceeded. Only successful calls count against the quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: No API key found in request or the key is invalid.
       content:
@@ -70,12 +76,6 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             message: No API key found in request
-    RateLimited:
-      description: Rate limit or monthly quota exceeded. Only successful calls count against the quota.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object

@@ -44,7 +44,38 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: No API key found in request or the key is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: No API key found in request
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: No API key found in request
+    QuotaBucket:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total requests allowed in the period.
+          example: 300
+        used:
+          type: integer
+          description: Requests used in the period.
+          example: 72
+        remaining:
+          type: integer
+          description: Requests remaining in the period.
+          example: 229
     AccountStatus:
       type: object
       properties:
@@ -61,37 +92,6 @@ components:
               $ref: '#/components/schemas/QuotaBucket'
             grace:
               $ref: '#/components/schemas/QuotaBucket'
-    QuotaBucket:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total requests allowed in the period.
-          example: 300
-        used:
-          type: integer
-          description: Requests used in the period.
-          example: 72
-        remaining:
-          type: integer
-          description: Requests remaining in the period.
-          example: 229
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: No API key found in request
-  responses:
-    Unauthorized:
-      description: No API key found in request or the key is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            message: No API key found in request
   securitySchemes:
     apiKeyHeader:
       type: apiKey
