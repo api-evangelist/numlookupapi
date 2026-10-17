@@ -44,23 +44,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: No API key found in request or the key is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            message: No API key found in request
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: No API key found in request
     QuotaBucket:
       type: object
       properties:
@@ -92,6 +76,22 @@ components:
               $ref: '#/components/schemas/QuotaBucket'
             grace:
               $ref: '#/components/schemas/QuotaBucket'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: No API key found in request
+  responses:
+    Unauthorized:
+      description: No API key found in request or the key is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: No API key found in request
   securitySchemes:
     apiKeyHeader:
       type: apiKey
