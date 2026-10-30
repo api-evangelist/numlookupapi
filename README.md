@@ -1,4 +1,4 @@
-# NumLookupAPI (numlookupapi)
+# NumLookupAPI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,104 +64,119 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-NumLookupAPI is a phone number validation and lookup REST API from everapi. A single GET request validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, geographic location, carrier, and line type (mobile, landline, etc.). It is used for phone verification, data validation, and caller identity enrichment.
+NumLookupAPI is a phone number validation and lookup REST API from everapi. A single GET request validates a phone number and returns whether it is valid along with its local and international formats, country prefix, ISO country code and name, geographic location, carrier, and line type (mobile, landline, etc.). It offers a free tier of 100 requests per month, is authenticated with a simple API key, and is used for phone verification, data validation, and caller identity enrichment.
 
-## Access Model
+**Areas:** Number Verification · Phone Validation · Phone Number Lookup · Carrier Lookup · Line Type · Verification · Data Validation · Caller Identity
 
-NumLookupAPI is a commercial API with a free tier:
+## NumLookupAPI on APIs.io
 
-- **Free** — $0/month, 100 requests/month, capped at 10 requests/minute. No credit card required to start.
-- **Basic** — $9.99/month, 5,000 requests/month, no per-minute rate cap.
-- **Pro** — $49.99/month, 50,000 requests/month, no per-minute rate cap.
-- **Scale** — $109.99/month, 250,000 requests/month, no per-minute rate cap.
-- **Custom** — custom monthly volume and price; contact everapi.
+Everything profiled for NumLookupAPI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/numlookupapi/](https://apis.io/providers/numlookupapi/)** — or go straight to one of the APIs or properties below.
 
-All plans authenticate with a single API key. Paid plans remove the per-minute rate limit and are metered on a monthly request quota; only successful calls count against the quota. Yearly billing is discounted ~20% versus monthly. (Plan quotas and prices as published on the pricing page; billing terms are modeled and marked `reconciled: false` in `plans/` and `finops/`.)
+### APIs (2)
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/numlookupapi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/numlookupapi/refs/heads/main/apis.yml)
+- [NumLookupAPI Account API](https://apis.io/apis/numlookupapi/numlookupapi-account-api/) — Account quota and usage status.
+- [NumLookupAPI Validation API](https://apis.io/apis/numlookupapi/numlookupapi-validation-api/) — Phone number validation and lookup.
 
-## Tags
+### Published properties
 
-- Number Verification
-- Phone Validation
-- Phone Number Lookup
-- Carrier Lookup
-- Line Type
-- Verification
-- Data Validation
-- Caller Identity
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### Agentic access (1)
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## APIs
+- [Numlookupapi Agentic Access](https://apis.io/agentic-access/numlookupapi/numlookupapi-agentic-access/)
 
-### NumLookupAPI Phone Number Validation API
+#### Collections (3)
 
-Validate and look up a phone number with a single GET request. Returns a `valid` flag plus local and international formats, country prefix, ISO country code and name, location, carrier, and line type. Accepts numbers with a country prefix (e.g. `+14158586273`) or a bare number paired with an ISO `country_code`.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://numlookupapi.com/docs/validate](https://numlookupapi.com/docs/validate)
-- **Base URL:** `https://api.numlookupapi.com/v1`
+- [NumLookupAPI](https://apis.io/collections/numlookupapi/open-numlookupapi/)
+- [NumLookup Account API](https://apis.io/collections/numlookupapi/open-numlookupapi-account-api/)
+- [NumLookup Account Validation API](https://apis.io/collections/numlookupapi/open-numlookupapi-validation-api/)
 
-#### Tags
+#### Security (2)
 
-- Phone Validation
-- Number Verification
-- Carrier Lookup
-- Line Type
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Numlookupapi Authentication](https://apis.io/security/numlookupapi/numlookupapi-authentication/)
+- [Numlookupapi Domain Security](https://apis.io/security/numlookupapi/numlookupapi-domain-security/)
 
-- [Documentation](https://numlookupapi.com/docs)
-- [API Reference](https://numlookupapi.com/docs/validate)
-- [OpenAPI](openapi/numlookupapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/numlookupapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/numlookupapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### NumLookupAPI Account Status API
+Published plans, tiers and prices.
 
-Return the current account identifier and remaining request quota for the month and any grace allowance. Requests to this endpoint do not count against your quota or rate limit.
+- [Numlookupapi Plans Pricing](https://apis.io/plans/numlookupapi/numlookupapi-plans-pricing/)
 
-- **Human URL:** [https://numlookupapi.com/docs/status](https://numlookupapi.com/docs/status)
-- **Base URL:** `https://api.numlookupapi.com/v1`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Account
-- Quota
-- Usage
+- [Numlookupapi Rate Limits](https://apis.io/rate-limits/numlookupapi/numlookupapi-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [API Reference](https://numlookupapi.com/docs/status)
-- [OpenAPI](openapi/numlookupapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/numlookupapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/numlookupapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-## Authentication
+- [Numlookupapi Finops](https://apis.io/finops/numlookupapi/numlookupapi-finops/)
 
-Pass your API key in the `apikey` HTTP header (recommended) or as an `apikey` query-string parameter. See [authentication/numlookupapi-authentication.yml](authentication/numlookupapi-authentication.yml).
+## Where to find this API
 
-```
-curl "https://api.numlookupapi.com/v1/validate/+14158586273" \
-  -H "apikey: YOUR-API-KEY"
-```
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-## Common Properties
-
-- [Authentication](authentication/numlookupapi-authentication.yml)
-- [Domain Security](security/numlookupapi-domain-security.yml)
-- [GitHub Organization](https://github.com/everapihq)
-- [LinkedIn](https://www.linkedin.com/company/everapi)
 - [Website](https://numlookupapi.com)
 - [Documentation](https://numlookupapi.com/docs)
-- [Plans](plans/numlookupapi-plans-pricing.yml)
-- [Rate Limits](rate-limits/numlookupapi-rate-limits.yml)
-- [Fin Ops](finops/numlookupapi-finops.yml)
+- [GitHub](https://github.com/everapihq)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 26.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.0** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/numlookupapi/](https://apis.io/providers/numlookupapi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for NumLookupAPI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/numlookupapi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
